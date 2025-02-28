@@ -19,7 +19,7 @@ let readS () =
    |> Array.toList
 
 let prepSymb (ch:string) strings =
-    strings |> List.map (fun s -> ch + s)
+    strings |> List.map (fun s -> s + ch)
 
 let str = readS()
 let symb = getCh()
