@@ -11,18 +11,23 @@ let getCh () =
             loop()
     loop()
 
-let readS () =
-   printfn "Enter string with space in between: "
-   let inp = Console.ReadLine()
-   inp.Split(' ')
-   |> Array.filter (fun s -> not (String.IsNullOrWhiteSpace(s)))
-   |> Array.toList
+let rec readS q =
+   if q <= 0 then
+       []
+   else
+       printfn "Enter string: "
+       let str = Console.ReadLine()
+       str :: readS(q - 1) 
 
 let prepSymb (ch:string) strings =
     strings |> List.map (fun s -> s + ch)
 
-let str = readS()
+printfn "Enter quantity of strings: "
+let q = int(Console.ReadLine())
+        
+let str = readS q
 let symb = getCh()
 let newL = prepSymb symb str
 
 printfn "%A" newL
+
