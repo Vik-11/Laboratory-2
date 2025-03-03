@@ -1,4 +1,3 @@
-open System
 
 let rec readS q =
    if q <= 0 then
@@ -16,10 +15,19 @@ let findSH strings =
             shortest)
             firstS strings
 
-printfn "Enter quantity of elements: "
-let q = int(Console.ReadLine())
+let rec getInt() = 
+    printfn "Enter quantity of strings: "
+    let q = Console.ReadLine()
+    match Int32.TryParse(q) with
+    | true, q -> q
+    | false, _ ->
+        printfn "Try integer"
+        getInt()
+
+let q = getInt()
 
 let s1 = readS q
 let SH = findSH s1
 let lg = SH.Length
 printf "Shortest is: %s, length is: %d" SH lg
+
