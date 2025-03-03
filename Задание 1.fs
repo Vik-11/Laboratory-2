@@ -11,6 +11,15 @@ let getCh () =
             loop()
     loop()
 
+let rec getInt() = 
+    printfn "Enter quantity of strings: "
+    let q = Console.ReadLine()
+    match Int32.TryParse(q) with
+    | true, q -> q
+    | false, _ ->
+        printfn "Try integer"
+        getInt()
+
 let rec readS q =
    if q <= 0 then
        []
@@ -22,8 +31,7 @@ let rec readS q =
 let prepSymb (ch:string) strings =
     strings |> List.map (fun s -> s + ch)
 
-printfn "Enter quantity of strings: "
-let q = int(Console.ReadLine())
+let q = getInt()
         
 let str = readS q
 let symb = getCh()
