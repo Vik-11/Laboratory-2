@@ -1,11 +1,12 @@
 open System
 
-let readS () =
-   printfn "Enter string with space in between: "
-   let inp = Console.ReadLine()
-   inp.Split(' ')
-   |> Array.filter (fun s -> not (String.IsNullOrWhiteSpace(s)))
-   |> Array.toList
+let rec readS q =
+   if q <= 0 then
+       []
+   else
+       printfn "Enter string: "
+       let str = Console.ReadLine()
+       str :: readS(q - 1) 
 
 let findSH strings =
     let firstS = List.head strings
@@ -15,7 +16,10 @@ let findSH strings =
             shortest)
             firstS strings
 
-let s = readS()
-let SH = findSH s
+printfn "Enter quantity of elements: "
+let q = int(Console.ReadLine())
+
+let s1 = readS q
+let SH = findSH s1
 let lg = SH.Length
 printf "Shortest is: %s, length is: %d" SH lg
